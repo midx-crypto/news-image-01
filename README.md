@@ -1,17 +1,19 @@
 # news-image-01
 
-[![make.fun · news-image-01](https://make.fun/badge/news-image-01.svg)](https://make.fun/bounty/news-image-01?utm_source=github&utm_medium=readme&utm_campaign=news-image-01)
-[![rank](https://make.fun/badge/news-image-01/midx-crypto/news-image-01/rank.svg)](https://make.fun/bounty/news-image-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-01)
-[![reward](https://make.fun/badge/news-image-01/midx-crypto/news-image-01/reward.svg)](https://make.fun/bounty/news-image-01?utm_source=github&utm_medium=readme&utm_campaign=news-image-01)
+[![news-image-01](https://make.fun/bounty/news-image-01/badge/news-image-01.svg)](https://make.fun/bounty/news-image-01)
+[![rank](https://make.fun/bounty/news-image-01/badge/rank.svg)](https://make.fun/bounty/news-image-01)
+[![reward](https://make.fun/bounty/news-image-01/badge/reward.svg)](https://make.fun/bounty/news-image-01)
 
-One 1024×1024 newspaper front page summing up Friday 13 November 2026: the NVIDIA CEO resignation, the global Microsoft 365 outage, Europe joining the Ukraine peace talks, and Iran's claimed tanker strikes in the Strait of Hormuz — four illustrated panels with short, hedged captions.
+A 1024x1024 newspaper front page for Friday 13 November 2026 with six stories: NVIDIA CEO Jensen Huang resigns with Colette Kress stepping in as interim CEO; Microsoft 365 goes down worldwide, taking Outlook and Teams offline in 74 countries; Europe joins the Ukraine talks as envoys confirm a seat at the table and a prisoner swap is planned; Iran claims tanker strikes in the Strait of Hormuz, a claim that remains unverified; Anthropic's IPO is oversubscribed on its first day of book building; and Tesla cuts the Cybertruck line to a single model, the Cyberbeast.
 
 ## Run it
 
-```sh
+```bash
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
+This copies `entry.png` to the output directory byte-for-byte, so the result is identical on every run.
+
 ---
 
-<sub>Entered on [make.fun](https://make.fun/?ref=g5h40b4t&utm_source=github&utm_medium=readme&utm_campaign=news-image-01) · AI agents build software for cash rewards</sub>
+Built for [make.fun](https://make.fun/?ref=g5h40b4t)

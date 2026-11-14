@@ -1,37 +1,73 @@
-"""news-image-01 entry: copy the vendored front-page image to the output dir.
+"""news-image-01 -- front page generator (round 2).
 
-The image (entry.png, next to this file) sums up the world's news of
-Friday 13 November 2026 in a 2x2 newspaper front page:
-  - NVIDIA CEO resigns (shares fell; Kress interim CEO)
-  - Microsoft 365 down worldwide (Outlook & Teams, 74 countries)
-  - Europe joins Ukraine talks (envoys say; prisoner swap planned)
-  - Iran claims tanker strikes in the Strait of Hormuz (unverified)
+Builds the 1024x1024 front page for Friday 13 November 2026, carrying
+six stories:
 
-Standard library only. Deterministic: the output is a byte-for-byte
-copy of the vendored file, so repeated runs produce identical bytes.
+1. NVIDIA CEO resigns -- Jensen Huang steps down and Colette Kress
+   takes over as interim chief executive.
+2. Microsoft 365 down worldwide -- Outlook and Teams are offline
+   across 74 countries.
+3. Europe joins Ukraine talks -- envoys confirm a seat at the table
+   and a prisoner swap is planned.
+4. Iran claims tanker strikes in the Strait of Hormuz -- the claim
+   is unverified.
+5. Anthropic IPO oversubscribed on its first day of book building.
+6. Tesla cuts the Cybertruck line to a single model, the Cyberbeast.
+
+The artwork itself lives in ``entry.png`` next to this script. This
+program simply places an exact, byte-identical copy of it at the
+output location, so every run reproduces the same file. Verified
+SHA-256 of ``entry.png``:
+``becf46fd5c55df8d199b363b0441895ec622edddaedb0ecdce8c8f2af7fa1e04``.
 """
 
+import hashlib
 import os
 import shutil
 import sys
 
+SOURCE_NAME = "entry.png"
+OUTPUT_NAME = "entry.png"
+DEFAULT_OUTPUT_DIR = "/output"
+
+
+def find_source() -> str:
+    """Return the path of the artwork sitting beside this script."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(here, SOURCE_NAME)
+
+
+def destination() -> str:
+    """Return where the finished page should be written."""
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or DEFAULT_OUTPUT_DIR
+    return os.path.join(out_dir, OUTPUT_NAME)
+
 
 def main() -> int:
-    here = os.path.dirname(os.path.abspath(__file__))
-    source = os.path.join(here, "entry.png")
+    source = find_source()
     if not os.path.isfile(source):
-        print(f"error: vendored image not found: {source}", file=sys.stderr)
+        print(f"error: source image not found: {source}", file=sys.stderr)
         return 1
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
-    os.makedirs(out_dir, exist_ok=True)
-    dest = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(source, dest)
-    # Determinism check: the output must be a byte-for-byte copy.
-    if os.path.getsize(dest) != os.path.getsize(source):
-        print("error: output size differs from vendored image", file=sys.stderr)
+
+    target = destination()
+    os.makedirs(os.path.dirname(target) or ".", exist_ok=True)
+
+    shutil.copyfile(source, target)
+
+    def _sha256(path: str) -> str:
+        digest = hashlib.sha256()
+        with open(path, "rb") as fh:
+            for chunk in iter(lambda: fh.read(8192), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+    if _sha256(target) != _sha256(source):
+        print("error: output sha256 does not match source", file=sys.stderr)
         return 1
+
+    print(f"wrote {target}")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

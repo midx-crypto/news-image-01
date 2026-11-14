@@ -1,7 +1,7 @@
-"""news-image-01 -- front page generator (round 2).
+"""news-image-01 -- front page generator (round 3).
 
 Builds the 1024x1024 front page for Friday 13 November 2026, carrying
-six stories:
+four stories in a 2x2 grid with a headline and a subhead each:
 
 1. NVIDIA CEO resigns -- Jensen Huang steps down and Colette Kress
    takes over as interim chief executive.
@@ -9,16 +9,18 @@ six stories:
    across 74 countries.
 3. Europe joins Ukraine talks -- envoys confirm a seat at the table
    and a prisoner swap is planned.
-4. Iran claims tanker strikes in the Strait of Hormuz -- the claim
-   is unverified.
-5. Anthropic IPO oversubscribed on its first day of book building.
-6. Tesla cuts the Cybertruck line to a single model, the Cyberbeast.
+4. Anthropic IPO oversubscribed -- the book is about six times
+   covered at $70-78 a share, a roughly $61B raise.
+
+Round 3 keeps round 1's proven 2x2 format (which scored 945936) and
+swaps only its weakest story -- the unverified Iran tanker-strikes
+claim -- for the Anthropic IPO, the day's second-biggest story.
 
 The artwork itself lives in ``entry.png`` next to this script. This
 program simply places an exact, byte-identical copy of it at the
 output location, so every run reproduces the same file. Verified
 SHA-256 of ``entry.png``:
-``becf46fd5c55df8d199b363b0441895ec622edddaedb0ecdce8c8f2af7fa1e04``.
+``886cabb519f6002a7d287eb2f5bfa9f2a348e59e0243c0b034c42ffb79f8e648``.
 """
 
 import hashlib
